@@ -1,17 +1,18 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useMovieModel } from "../models/useMovieModel";
-import CloseIcon from "../images/icons/close-icon.png";
-import PlusIcon from "../images/icons/plus-icon.png";
+import { ReactComponent as Plus } from "../images/icons/plus-svgrepo-com.svg";
+import { ReactComponent as Close } from "../images/icons/x-svgrepo-com.svg";
 
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original";
 
-
-export default function Card({ movieId, closeAction, toggleFavorite }) {
+export default function Card({ movieId, closeAction, toggleFavorite, favorites }) {
   const { movie, getMovieById } = useMovieModel();
+  const isMarked = favorites.includes(movieId);
 
   useEffect(() => {
     getMovieById(movieId);
+    console.log(isMarked);
   }, [movieId]);
 
   const closeCard = () => closeAction();
@@ -20,7 +21,9 @@ export default function Card({ movieId, closeAction, toggleFavorite }) {
     <Modal>
       <Image src={`${IMAGE_BASE_URL}${movie?.backdrop_path}`} alt="movie image" />
       <MovieInfo>
-        <PlusButton src={PlusIcon} onClick={() => toggleFavorite(movieId)} />
+        <PlusButtonWrapper onClick={() => toggleFavorite(movieId)} isMarked>
+          <Plus />
+        </PlusButtonWrapper>
         <H1>{movie?.original_title}</H1>
         <H2>{movie?.tagline}</H2>
         <Tag>{movie?.status === "Released" ? new Date(movie?.release_date).getFullYear() : "unreleased"}</Tag>
@@ -32,7 +35,9 @@ export default function Card({ movieId, closeAction, toggleFavorite }) {
         <p>Production Countries : {movie?.production_countries.map((country) => country.name).join(", ")}</p>
         <p>Production Company : {movie?.production_companies.map((company) => company.name).join(", ")}</p>
       </MovieInfo>
-      <CloseButton src={CloseIcon} onClick={closeCard} />
+      <CloseButtonWrapper onClick={closeCard}>
+        <Close />
+      </CloseButtonWrapper>
     </Modal>
   );
 }
@@ -43,6 +48,8 @@ const Modal = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
+  height: 95vh;
+  overflow-y: auto;
   max-width: 700px;
   background-color: black;
   color: white;
@@ -53,14 +60,21 @@ const Image = styled.img`
   width: 100%;
 `;
 
-const PlusButton = styled.img`
-  width: 50px;
+const PlusButtonWrapper = styled.div`
   position: absolute;
   right: 5px;
+  top: -60px;
+  background: transparent;
+  svg {
+    fill: #262633;
+    width: 50px;
+    height: 50px;
+  }
   cursor: pointer;
 `;
 
 const MovieInfo = styled.div`
+  position: relative;
   padding: 10px;
 `;
 
@@ -83,12 +97,15 @@ const Description = styled.p`
   margin: 16px 0;
 `;
 
-const CloseButton = styled.img`
-  width: 30px;
+const CloseButtonWrapper = styled.div`
   position: absolute;
   top: 5px;
   right: 5px;
   background: transparent;
+  svg {
+    fill: white;
+    width: 50px;
+    height: 50px;
+  }
   cursor: pointer;
-  z-index: 20;
 `;

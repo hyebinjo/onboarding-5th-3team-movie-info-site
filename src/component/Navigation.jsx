@@ -27,7 +27,7 @@ export default function Navigation({ movies }) {
     }
     document.addEventListener("mousedown", handleClickOutside);
   }, [searchBoxRef]);
-  
+
   useEffect(() => {
     if (movies) {
       getRecentlySearch();
@@ -78,7 +78,11 @@ export default function Navigation({ movies }) {
   return (
     <Container>
       <Wrap>
-        <LogoWrap onClick={()=>{navigation("/"); }>
+        <LogoWrap
+          onClick={() => {
+            navigation("/");
+          }}
+        >
           <LogoIco />
           <span>Movie</span>
         </LogoWrap>
