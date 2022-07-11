@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { checkExistEmail, createAccount, login } from "../models/AccessUserDB";
+import { checkExistEmail, createAccount, login } from "../utils/useAccount";
 import { errorMessages } from "../utils/validation";
 import {
   Button,

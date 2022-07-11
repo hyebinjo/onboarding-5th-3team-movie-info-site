@@ -3,24 +3,93 @@
     {
       "id": 1,
       "email": "test@t.co",
-      "password": "asd123!@#",
+      "password": "asd123!@",
       "watched": [
-        { "id": 19, "numberOfWached": 4 },
-        { "id": 35, "numberOfWached": 2 }
+        {
+          "id": 19,
+          "numberOfWached": 4
+        },
+        {
+          "id": 35,
+          "numberOfWached": 2
+        }
       ],
-      "likes": [293, 59, 2213],
-      "favorites": [550, 382]
+      "likes": [
+        924482
+      ],
+      "favorites": [
+        924482,
+        615469
+      ]
     },
     {
       "id": 2,
       "email": "test2@t.co",
-      "password": "asd123!@#",
+      "password": "asd123!@",
       "watched": [
-        { "id": 57, "numberOfWached": 3 },
-        { "id": 25, "numberOfWached": 7 }
+        {
+          "id": 57,
+          "numberOfWached": 3
+        },
+        {
+          "id": 25,
+          "numberOfWached": 7
+        }
       ],
-      "likes": [251, 22, 56],
-      "favorites": [622, 441]
+      "likes": [
+        639933
+      ],
+      "favorites": [
+        639933
+      ]
+    },
+    {
+      "id": 3,
+      "email": "asdf@asc.ca",
+      "password": "asd123!@",
+      "watched": [],
+      "likes": [],
+      "favorites": []
+    },
+    {
+      "id": 4,
+      "email": "test66@t.coa",
+      "password": "asd123!@",
+      "watched": [],
+      "likes": [],
+      "favorites": []
+    },
+    {
+      "id": 5,
+      "email": "teasdfacd@asdcasdc.asc",
+      "password": "asd1231@",
+      "watched": [],
+      "likes": [],
+      "favorites": []
+    },
+    {
+      "id": 6,
+      "email": "aaaaa@aaa.co",
+      "password": "asd123!@",
+      "watched": [],
+      "likes": [],
+      "favorites": []
+    },
+    {
+      "watched": [],
+      "likes": [],
+      "favorites": [],
+      "id": 7,
+      "email": "aaaaasdf@asooa.cd",
+      "password": "asd1123#2"
+    },
+    {
+      "watched": [],
+      "likes": [],
+      "favorites": [],
+      "id": 8,
+      "email": "hello22@asd.co",
+      "password": "asd123!@"
     }
   ]
 }

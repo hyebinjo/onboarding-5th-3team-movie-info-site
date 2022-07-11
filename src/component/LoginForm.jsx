@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { checkExistEmail, checkPassword, login } from "../models/AccessUserDB";
 import { theme } from "../theme";
+import { checkExistEmail, checkPassword, login } from "../utils/useAccount";
 import { checkValidation, errorMessages } from "../utils/validation";
 
 export const checkError = (errors) => Object.values(errors).find(Boolean);

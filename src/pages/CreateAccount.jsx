@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CreateAccountForm from "../component/CreateAccountForm";
-import { getLoggedInUser } from "../utils/library";
+import { getLoggedInUser } from "../utils/useAccount";
+import { Container } from "./Login";
 
 function CreateAccount() {
   const navigate = useNavigate();
@@ -11,7 +12,11 @@ function CreateAccount() {
     if (token) navigate("/");
   }, []);
 
-  return <CreateAccountForm />;
+  return (
+    <Container>
+      <CreateAccountForm />
+    </Container>
+  );
 }
 
 export default CreateAccount;

@@ -78,11 +78,7 @@ export default function Navigation({ movies }) {
   return (
     <Container>
       <Wrap>
-        <LogoWrap
-          onClick={() => {
-            navigation("/");
-          }}
-        >
+        <LogoWrap onClick={() => navigation("/")}>
           <LogoIco />
           <span>Movie</span>
         </LogoWrap>

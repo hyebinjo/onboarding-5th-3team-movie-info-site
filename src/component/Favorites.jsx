@@ -1,10 +1,10 @@
 import React from "react";
-import { getLoggedInUser } from "../utils/library";
 import { useMovieModel } from "../models/useMovieModel";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Contents } from "../pages/Main";
 import Thumbnail from "./Thumbnail";
+import { getLoggedInUser } from "../utils/useAccount";
 
 export default function Favorites() {
   const loggenInUser = getLoggedInUser();

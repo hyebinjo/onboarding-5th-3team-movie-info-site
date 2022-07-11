@@ -8,11 +8,11 @@ const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original";
 
 export default function Card({ movieId, closeAction, toggleFavorite, favorites }) {
   const { movie, getMovieById } = useMovieModel();
-  const isMarked = favorites.includes(movieId);
+  // const isMarked = favorites.includes(movieId);
 
   useEffect(() => {
     getMovieById(movieId);
-    console.log(isMarked);
+    // console.log(isMarked);
   }, [movieId]);
 
   const closeCard = () => closeAction();
@@ -21,7 +21,7 @@ export default function Card({ movieId, closeAction, toggleFavorite, favorites }
     <Modal>
       <Image src={`${IMAGE_BASE_URL}${movie?.backdrop_path}`} alt="movie image" />
       <MovieInfo>
-        <PlusButtonWrapper onClick={() => toggleFavorite(movieId)} isMarked>
+        <PlusButtonWrapper onClick={() => toggleFavorite(movieId)}>
           <Plus />
         </PlusButtonWrapper>
         <H1>{movie?.original_title}</H1>

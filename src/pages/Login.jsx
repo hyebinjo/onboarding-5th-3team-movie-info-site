@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import LoginForm from "../component/LoginForm";
-import { getLoggedInUser } from "../utils/library";
+import { getLoggedInUser } from "../utils/useAccount";
 
 function Login() {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ function Login() {
 
 export default Login;
 
-const Container = styled.div`
+export const Container = styled.div`
   height: 100vh;
   display: flex;
   justify-content: center;
