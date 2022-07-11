@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { useMovieModel } from "../models/useMovieModel";
 import Thumbnail from "../component/Thumbnail";
 import { useState } from "react";
-import Card from "../component/Card";
 import AccessUserDB from "../models/AccessUserDB";
 import { getLoggedInUser, saveToken } from "../utils/useAccount";
 

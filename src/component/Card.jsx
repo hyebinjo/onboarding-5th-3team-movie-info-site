@@ -6,7 +6,7 @@ import { ReactComponent as Close } from "../images/icons/x-svgrepo-com.svg";
 
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original";
 
-export default function Card({ movieId, closeAction, toggleFavorite }) {
+export default function Card({ movieId, closeAction, favorite, toggleFavorite }) {
   const { movie, getMovieById } = useMovieModel();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export default function Card({ movieId, closeAction, toggleFavorite }) {
     <Modal>
       <Image src={`${IMAGE_BASE_URL}${movie?.backdrop_path}`} alt="movie image" />
       <MovieInfo>
-        <PlusButtonWrapper onClick={() => toggleFavorite(movieId)}>
+        <PlusButtonWrapper onClick={() => toggleFavorite(movieId)} favorite={favorite}>
           <Plus />
         </PlusButtonWrapper>
         <H1>{movie?.original_title}</H1>
@@ -64,7 +64,7 @@ const PlusButtonWrapper = styled.div`
   top: -60px;
   background: transparent;
   svg {
-    fill: #262633;
+    fill: ${(props) => (props.favorite ? "white" : "#262633")};
     width: 50px;
     height: 50px;
   }

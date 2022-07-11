@@ -16,7 +16,7 @@ export default function Thumbnail({ movie, updateFavorite }) {
         <Title>{movie.title}</Title>
         <Poster alt="poster" src={`${IMAGE_BASE_URL}${movie.poster_path}`} />
       </ThumbnailContainer>
-      {card && <Card movieId={card} closeAction={() => setCard(false)} toggleFavorite={updateFavorite} />}
+      {card && <Card movieId={card} closeAction={() => setCard(false)} favorite={true} toggleFavorite={updateFavorite} />}
     </>
   );
 }
