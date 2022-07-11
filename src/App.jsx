@@ -4,12 +4,11 @@ import { theme } from "./theme";
 import { GlobalStyle } from "./GlobalStyle";
 
 function App() {
-  return(
+  return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Router />
     </ThemeProvider>
-  )
-  ;
-  }
+  );
+}
 export default App;

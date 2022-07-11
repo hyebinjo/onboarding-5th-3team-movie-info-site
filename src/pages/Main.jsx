@@ -11,9 +11,9 @@ import { getLoggedInUser, saveToken } from "../utils/useAccount";
 export default function Main() {
   const { movies, getMovies, searchMovies } = useMovieModel();
   const { movieTitle } = useParams();
-  const [card, setCard] = useState(false);
   const loggedInUser = getLoggedInUser();
   const favorites = loggedInUser?.favorites;
+  const id = loggedInUser?.id;
 
   useEffect(() => {
     if (movieTitle) {
@@ -32,7 +32,7 @@ export default function Main() {
     } else {
       favorites.push(movieId);
     }
-    AccessUserDB.updateUser(`users/${loggedInUser.id}`, {
+    AccessUserDB.updateUser(`${id}`, {
       favorites: favorites,
     });
     saveToken({ ...loggedInUser, favorites: favorites });
@@ -40,10 +40,7 @@ export default function Main() {
 
   return (
     <Container className="Container">
-      <Contents className="Contents">
-        {movies ? movies.results?.map((movie) => <Thumbnail key={movie.id} movie={movie} setCard={setCard} />) : <p>영화 목록이 없습니다</p>}
-        {card && <Card movieId={card} closeAction={() => setCard(false)} toggleFavorite={updateFavorite} />}
-      </Contents>
+      <Contents className="Contents">{movies ? movies.results?.map((movie) => <Thumbnail key={movie.id} movie={movie} updateFavorite={updateFavorite} />) : <p>영화 목록이 없습니다</p>}</Contents>
     </Container>
   );
 }

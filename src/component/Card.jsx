@@ -6,13 +6,11 @@ import { ReactComponent as Close } from "../images/icons/x-svgrepo-com.svg";
 
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original";
 
-export default function Card({ movieId, closeAction, toggleFavorite, favorites }) {
+export default function Card({ movieId, closeAction, toggleFavorite }) {
   const { movie, getMovieById } = useMovieModel();
-  // const isMarked = favorites.includes(movieId);
 
   useEffect(() => {
     getMovieById(movieId);
-    // console.log(isMarked);
   }, [movieId]);
 
   const closeCard = () => closeAction();
