@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useMovieModel } from "../models/useMovieModel";
 import { ReactComponent as Plus } from "../images/icons/plus-svgrepo-com.svg";
@@ -8,10 +8,11 @@ const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original";
 
 export default function Card({ movieId, closeAction, favorite, toggleFavorite }) {
   const { movie, getMovieById } = useMovieModel();
+  const [marked, setMarked] = useState(favorite);
 
   useEffect(() => {
     getMovieById(movieId);
-  }, [movieId]);
+  }, []);
 
   const closeCard = () => closeAction();
 
@@ -19,7 +20,13 @@ export default function Card({ movieId, closeAction, favorite, toggleFavorite })
     <Modal>
       <Image src={`${IMAGE_BASE_URL}${movie?.backdrop_path}`} alt="movie image" />
       <MovieInfo>
-        <PlusButtonWrapper onClick={() => toggleFavorite(movieId)} favorite={favorite}>
+        <PlusButtonWrapper
+          onClick={() => {
+            toggleFavorite(movieId);
+            setMarked((prev) => !prev);
+          }}
+          marked={marked}
+        >
           <Plus />
         </PlusButtonWrapper>
         <H1>{movie?.original_title}</H1>
@@ -64,7 +71,7 @@ const PlusButtonWrapper = styled.div`
   top: -60px;
   background: transparent;
   svg {
-    fill: ${(props) => (props.favorite ? "white" : "#262633")};
+    fill: ${(props) => (props.marked ? "white" : "#262633")};
     width: 50px;
     height: 50px;
   }
