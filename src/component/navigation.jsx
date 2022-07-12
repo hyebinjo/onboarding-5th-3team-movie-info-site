@@ -1,11 +1,11 @@
-
 import React from "react";
 import styled from "styled-components";
 // import { ReactComponent as LogoIco } from "../images/icons/netflix-svgrepo-com.svg";
 import { useNavigate } from "react-router";
 import NavigationButtons from "./NavigationButtons";
 import NavigationSearch from "./NavigationSearch";
-export default function Navigation({movies}) {
+
+export default function Navigation({ movies }) {
   const navigate = useNavigate();
 
   return (
@@ -15,7 +15,7 @@ export default function Navigation({movies}) {
           {/* <LogoIco /> */}
           <span>Movie</span>
         </LogoWrap>
-        <NavigationSearch movies={movies}/>
+        <NavigationSearch movies={movies} />
         <NavigationButtons />
       </Wrap>
     </Container>
