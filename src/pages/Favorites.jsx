@@ -1,10 +1,8 @@
-import React from "react";
-import { useMovieModel } from "../models/useMovieModel";
-import { useEffect } from "react";
-import { useState } from "react";
-import { Contents } from "../pages/Main";
-import Thumbnail from "./Thumbnail";
-import { getLoggedInUser } from "../utils/useAccount";
+import React, { useEffect, useState } from 'react';
+import { useMovieModel } from '../models/useMovieModel';
+import { getLoggedInUser } from '../utils/useAccount';
+
+import Contents from '../component/Container';
 
 export default function Favorites() {
   const loggenInUser = getLoggedInUser();
@@ -29,12 +27,5 @@ export default function Favorites() {
   }, [movies?.results]);
 
   // 할일: 컴포넌트 메인에서 재사용하기
-  return (
-    <Contents>
-      {favoriteMovies.length > 0 &&
-        favoriteMovies?.map((movie) => (
-          <Thumbnail key={movie.id} movie={movie} />
-        ))}
-    </Contents>
-  );
+  return <Contents movies={favoriteMovies} />;
 }

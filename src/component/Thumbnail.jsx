@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Card from "./Card";
 
-export default function Thumbnail({ movie, updateFavorite }) {
+export default function Thumbnail({ movie, updateFavorite,setCard }) {
   const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original";
   const [card, setCard] = useState(false);
-
+  
   const handleThumbnailClick = (movieId) => {
     setCard(movieId);
   };
