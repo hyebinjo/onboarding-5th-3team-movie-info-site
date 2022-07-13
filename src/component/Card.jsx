@@ -8,13 +8,14 @@ import AccessUserDB from "../models/AccessUserDB";
 
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original";
 
-export default function Card({ movieId, closeAction, favorite }) {
+export default function Card({ movieId, closeAction, favorite, setFavorite }) {
   const { movie, getMovieById } = useMovieModel();
   const [marked, setMarked] = useState(favorite);
   const loggedInUser = getLoggedInUser();
   const id = loggedInUser?.id;
   const favorites = loggedInUser?.favorites;
   const [isImageReady, setIsImageReady] = useState(false);
+  const [imageLoadFailed, setImageLoadFailed] = useState(false);
 
   useEffect(() => {
     getMovieById(movieId);
@@ -38,13 +39,26 @@ export default function Card({ movieId, closeAction, favorite }) {
   return (
     <Container onClick={(e) => e.target === e.currentTarget && closeCard()}>
       <Modal isImageReady={isImageReady}>
-        <Image src={`${IMAGE_BASE_URL}${movie?.backdrop_path}`} alt="movie image" onLoad={() => setIsImageReady(true)} />
+        {imageLoadFailed ? (
+          ""
+        ) : (
+          <Image
+            src={`${IMAGE_BASE_URL}${movie?.backdrop_path}`}
+            alt="movie image"
+            onError={() => {
+              setImageLoadFailed(true);
+              setIsImageReady(true);
+            }}
+            onLoad={() => setIsImageReady(true)}
+          />
+        )}
         <MovieInfo>
           {id && (
             <PlusButtonWrapper
               onClick={() => {
                 toggleFavorite(movieId);
                 setMarked((prev) => !prev);
+                setFavorite((prev) => !prev);
               }}
               marked={marked}
             >
@@ -54,13 +68,13 @@ export default function Card({ movieId, closeAction, favorite }) {
           <H1>{movie?.original_title}</H1>
           <H2>{movie?.tagline}</H2>
           <Tag>{movie?.status === "Released" ? new Date(movie?.release_date).getFullYear() : "unreleased"}</Tag>
-          <Tag>{movie?.runtime}min</Tag>
+          <Tag>{movie?.runtime}분</Tag>
           {movie?.genres.map((gnere) => (
             <Tag>{gnere.name}</Tag>
           ))}
           <Description>{movie?.overview}</Description>
-          <p>Production Countries : {movie?.production_countries.map((country) => country.name).join(", ")}</p>
-          <p>Production Company : {movie?.production_companies.map((company) => company.name).join(", ")}</p>
+          <p>국가 : {movie?.production_countries.map((country) => country.name).join(", ")}</p>
+          <p>제작 : {movie?.production_companies.map((company) => company.name).join(", ")}</p>
         </MovieInfo>
         <CloseButtonWrapper onClick={closeCard}>
           <Close />

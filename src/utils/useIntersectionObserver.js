@@ -2,7 +2,7 @@ import React from "react";
 
 const options = {
   root: null,
-  rootMargin: "0px",
+  rootMargin: "200px",
   threshold: 0,
 };
 

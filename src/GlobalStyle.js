@@ -24,15 +24,14 @@ time, mark, audio, video {
   font-family: 'Source Sans Pro', sans-serif;
 }
 body {
-  overflow: auto;
-
+  overflow-y: overlay;
   &::-webkit-scrollbar {
     width: 15px;
 
   }
 
   &::-webkit-scrollbar-track {
-    background-color: #262633;
+    opacity: 0;
   }
 
   &::-webkit-scrollbar-thumb {

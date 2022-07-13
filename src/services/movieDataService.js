@@ -9,7 +9,7 @@ export const movieService = axios.create({
   },
   params: {
     api_key: API_KEY,
-    language: "en-US",
+    language: "ko-KR",
   },
 });
 

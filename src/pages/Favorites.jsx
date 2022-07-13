@@ -1,9 +1,8 @@
-
 import React, { useEffect } from "react";
 import { useMovieModel } from "../models/useMovieModel";
 import { getLoggedInUser } from "../utils/useAccount";
-
 import Contents from "../component/Contents";
+import Footer from "../component/Footer";
 
 export default function Favorites() {
   const loggedInUser = getLoggedInUser();
@@ -14,5 +13,10 @@ export default function Favorites() {
     getMoviesByIds(favorites);
   }, []);
 
-  return <Contents movies={movies} />;
+  return (
+    <>
+      <Contents movies={movies} />
+      <Footer />
+    </>
+  );
 }

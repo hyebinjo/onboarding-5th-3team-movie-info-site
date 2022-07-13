@@ -6,7 +6,7 @@ export const useMovieModel = () => {
   const [movie, setMovie] = useState(null);
 
   const getMoviesCallback = (response) => {
-    setMovies([...movies, ...response.data?.results]);
+    response.data.page === 1 ? setMovies(response.data?.results) : setMovies([...movies, ...response.data?.results]);
     return response;
   };
   const getMovieByIdCallback = (response) => {
@@ -44,6 +44,7 @@ export const useMovieModel = () => {
       getMoviesCallback(response);
     });
   };
+
   return {
     movie,
     movies,

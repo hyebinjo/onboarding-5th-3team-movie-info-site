@@ -13,16 +13,11 @@ export default function NavigationSearch() {
   const [searchReady, setSearchReady] = useState(false);
   const [searchShow, setSearchShow] = useState(false);
   const [recentSearches, setRecentSearches] = useState([]);
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getMovies();
   },[])
-    const otherOneTouch = ((event) => {
-  
-  	(document.activeElement).blur() // 현재 활성화된 element의 blur 이벤트 호출
-     
-  }, []);
   useEffect(() => {
     function handleClickOutside(event) {
       if (
@@ -34,7 +29,7 @@ export default function NavigationSearch() {
     }
     document.addEventListener("mousedown", handleClickOutside);
   }, [searchBoxRef]);
-
+  
   useEffect(() => {
     if (movies) {
       getRecentlySearch();
@@ -42,24 +37,25 @@ export default function NavigationSearch() {
   }, [movies]);
 
   const moveToSearchPath = (event) => {
+    const path = searchRef.current.value;
     event.preventDefault();
     saveRecentlySearch(searchRef.current.value);
-    navigation(`/search/${searchRef.current.value}`);
     searchRef.current.value = "";
     setSearchReady(false)
     setSearchShow(false)
     searchRef.current.blur()
+    navigate(`/search/${path}`);
   };
 
   const moveToSearchBoxPath = (event) => {
-    
     const searchClick = event.target.innerText.split("\n",1).toString();
-    navigation(`/search/${searchClick}`);
+    navigate(`/search/${searchClick}`);
+    
     setSearchShow(false)
+    
   };
 
   const checkFuzzyStringMatch = (term) => {
-    const regex = new RegExp(term.toLowerCase());
     return movies?.filter((movie) => getRegex(term).test(movie.title));
   };
 
@@ -82,12 +78,12 @@ export default function NavigationSearch() {
     handleLocalStorage(recentArr)
     setRecentSearches(recentArr !== null && recentArr.split(","));
   };
+
   const removeRecentlySearch = (event) => {
     if(recentSearches.length === 1) setSearchShow(false) // 마지막 검색어 삭제되면 searchBox 삭제 !!
     event.stopPropagation();
     const targetRecently = event.target.parentElement.innerText.split("\n",1).toString()
     const recentArr = recentSearches.filter((word) => word !== targetRecently);
-    console.log("타겟",targetRecently,"현재",recentSearches ,"변경",recentArr);
     handleLocalStorage(recentArr)
     setRecentSearches(recentArr);
     
@@ -107,7 +103,8 @@ export default function NavigationSearch() {
     setSearchShow(true);
     processChanges(searchInput)
   };
-    const debounce = (callback,delay) => {
+  
+  const debounce = (callback,delay) => {
     let timer;
     return (...args) => {
       clearTimeout(timer);
@@ -162,7 +159,7 @@ export default function NavigationSearch() {
                   >
                     <Item>{item}</Item>
                     <ItemRemove onClick={removeRecentlySearch}>
-                      삭제
+                      X
                     </ItemRemove>
                   </SearchItem>
                 )
@@ -213,11 +210,12 @@ const SearchBox = styled.div`
   display: flexbox;
   width: 18vw;
   font-size: 16px;
+
   border-radius: 0 0 5px 5px;
   background-color: white;
   visibility: hidden;
   border: 1px solid #d2cbcbcc;
-
+  
   ${(props) =>
     props.show &&
     `
@@ -231,7 +229,8 @@ const SearchBox = styled.div`
 const RecentWrap = styled.div`
   width: 100%;
   padding-bottom: 0px;
-  overflow: hidden;
+  height: 12rem;
+  overflow-y: scroll;
   color: black;
   background-color: white;
   /* transition: all 1s ease; */
@@ -240,6 +239,9 @@ const RecentWrap = styled.div`
     `
     padding-bottom: 5px;
   `}
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 const SearchOption = styled.div`
   display: none;
@@ -287,9 +289,8 @@ const Item = styled.div`
 `;
 const ItemRemove = styled.div`
   background-color: transparent;
-  border: 1px solid black;
   color: black;
   :hover{
-    background-color: red;
+    color: red;
   }
 `;
