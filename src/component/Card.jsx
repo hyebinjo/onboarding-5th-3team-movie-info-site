@@ -38,7 +38,7 @@ export default function Card({ movieId, closeAction, favorite }) {
   return (
     <Container onClick={(e) => e.target === e.currentTarget && closeCard()}>
       <Modal isImageReady={isImageReady}>
-        <Image src={`${IMAGE_BASE_URL}${movie?.backdrop_path}`} alt="movie image" onLoad={() => setIsImageReady(true)} />
+        <Image src={`${IMAGE_BASE_URL}${movie?.backdrop_path}`} alt="movie image" onError={() => setIsImageReady(true)} onLoad={() => setIsImageReady(true)} />
         <MovieInfo>
           {id && (
             <PlusButtonWrapper
